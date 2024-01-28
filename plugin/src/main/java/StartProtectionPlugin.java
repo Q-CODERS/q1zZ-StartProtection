@@ -1,5 +1,3 @@
-package me.q1zz.startprotection;
-
 import me.q1zz.startprotection.message.MessageAnnouncer;
 import me.q1zz.startprotection.util.legacy.LegacyColorProcessor;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;

@@ -1,4 +1,4 @@
-package me.q1zz.startprotection.message.serializer;
+package message.serializer;
 
 import eu.okaeri.configs.schema.GenericsDeclaration;
 import eu.okaeri.configs.serdes.DeserializationData;

@@ -1,4 +1,4 @@
-package me.q1zz.startprotection.message;
+package message;
 
 import lombok.Getter;
 import lombok.Setter;

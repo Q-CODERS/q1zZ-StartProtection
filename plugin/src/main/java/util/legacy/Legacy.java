@@ -1,4 +1,4 @@
-package me.q1zz.startprotection.util.legacy;
+package util.legacy;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;

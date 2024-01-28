@@ -1,2 +1,5 @@
 rootProject.name = 'q1zZ-StartProtection-spigot'
 
+// Plugin
+include 'plugin'
+

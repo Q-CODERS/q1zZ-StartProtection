@@ -1,4 +1,4 @@
-package me.q1zz.startprotection.message;
+package message;
 
 import lombok.RequiredArgsConstructor;
 import net.kyori.adventure.audience.Audience;
