@@ -1,4 +1,4 @@
-package message;
+package me.q1zz.startprotection.message;
 
 public enum MessageType {
     CHAT,
