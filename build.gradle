@@ -1,0 +1,84 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'java'
+}
+
+group 'me.q1zz.startprotection'
+version '0.1'
+
+repositories {
+    mavenCentral()
+
+    maven {url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'}
+    maven {url = "https://storehouse.okaeri.eu/repository/maven-public/" }
+    maven {url = "https://repo.panda-lang.org/releases" }
+
+}
+
+dependencies {
+
+    // Spigot API
+    compileOnly 'org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT'
+
+    // Configuration
+    implementation 'eu.okaeri:okaeri-configs-yaml-bukkit:5.0.0-beta.5'
+    implementation 'eu.okaeri:okaeri-configs-serdes-bukkit:5.0.0-beta.5'
+    implementation 'eu.okaeri:okaeri-configs-serdes-commons:5.0.0-beta.5'
+
+    // Persistence
+    implementation 'eu.okaeri:okaeri-persistence-jdbc:2.0.0-beta.1'
+
+    // HikariCP
+    implementation 'com.zaxxer:HikariCP:5.1.0'
+
+    // MySQL Driver
+    implementation 'com.mysql:mysql-connector-j:8.3.0'
+
+    // Caching (caffeine)
+    implementation 'com.github.ben-manes.caffeine:caffeine:3.1.8'
+
+    // Adventure (messages)
+    implementation 'net.kyori:adventure-platform-bukkit:4.3.0'
+    implementation 'net.kyori:adventure-text-minimessage:4.13.0'
+
+    // Commands
+    implementation 'dev.rollczi:litecommands-bukkit:3.3.3'
+
+    // Annotations
+    implementation 'org.jetbrains:annotations:23.0.0'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    // Tests
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+shadowJar {
+    archiveFileName = "q1zZ-StartProtection-${project.version}.jar"
+
+    exclude(
+            "org/checkerframework/**",
+            "META-INF/**",
+            "javax/**"
+    )
+
+    relocate("eu.okaeri", "me.q1zz.startprotection.libs.eu.okaeri")
+    relocate("dev.rollczi", "me.q1zz.startprotection.libs.dev.rollczi")
+    relocate("net.kyori", "me.q1zz.startprotection.libs.net.kyori")
+    relocate("org.jetbrains", "me.q1zz.startprotection.libs.org.jetbrains")
+    relocate("org.intellij", "me.q1zz.startprotection.libs.org.intellij")
+    relocate("panda.std", "me.q1zz.startprotection.libs.panda.std")
+    relocate("com.zaxxer.hikari", "me.q1zz.startprotection.libs.com.zaxxer.hikari")
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs.add("-parameters")
+}
