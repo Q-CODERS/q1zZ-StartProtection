@@ -4,11 +4,16 @@ import eu.okaeri.configs.OkaeriConfig;
 import eu.okaeri.configs.annotation.Comment;
 import lombok.Getter;
 import me.q1zz.startprotection.configuration.section.CacheSection;
+import me.q1zz.startprotection.configuration.section.DatabaseSection;
 import me.q1zz.startprotection.configuration.section.MessagesSection;
 import me.q1zz.startprotection.configuration.section.ProtectionSection;
 
 @Getter
 public class PluginConfig extends OkaeriConfig {
+
+    @Comment("PL: Konfiguracja bazy danych.")
+    @Comment("PL: Database configuration.")
+    private DatabaseSection database = new DatabaseSection();
 
     @Comment("PL: Konfiguracja ochrony startowej.")
     @Comment("EN: Start protection configuration.")
