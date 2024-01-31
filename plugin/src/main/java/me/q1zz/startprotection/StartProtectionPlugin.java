@@ -58,7 +58,9 @@ public class StartProtectionPlugin extends JavaPlugin {
         final DocumentPersistence persistence = this.databaseManager.persistence();
         final PersistenceCollection protectionCollection = PersistenceCollection.of(ProtectionRepository.class);
 
-        persistence.registerCollection(protectionCollection);
+        this.databaseManager.registerCollections(
+                protectionCollection
+        );
 
         final BukkitAudiences audiences = BukkitAudiences.create(this);
         final MiniMessage miniMessage = MiniMessage.builder()
