@@ -28,6 +28,10 @@ public class Protection extends Document {
         this.endOfProtection = Instant.EPOCH;
     }
 
+    public boolean isActive() {
+        return this.isActivated() && !this.isEnd();
+    }
+
     public boolean isActivated() {
         return this.endOfProtection != null;
     }

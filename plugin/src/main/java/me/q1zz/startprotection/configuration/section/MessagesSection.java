@@ -24,4 +24,9 @@ public class MessagesSection extends OkaeriConfig {
     @CustomKey("protection-time")
     private Message protectionTime = Message.actionbar("&8[&6&lOCHRONA&8] » &eOchrona startowa aktywna jeszcze przez:&7 {TIME}");
 
+    @Comment("PL: Wiadomość, gdy gracz ma aktywną ochronę.")
+    @Comment("EN: Message, when player has start protection.")
+    @CustomKey("player-has-protection")
+    private Message playerHasProtection = Message.chat("&8» &cTen gracz ma aktywną ochronę startową!");
+
 }
