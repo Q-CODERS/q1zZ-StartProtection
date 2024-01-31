@@ -7,7 +7,6 @@ import eu.okaeri.persistence.PersistencePath;
 import eu.okaeri.persistence.document.ConfigurerProvider;
 import eu.okaeri.persistence.document.DocumentPersistence;
 import eu.okaeri.persistence.jdbc.MariaDbPersistence;
-import eu.okaeri.persistence.repository.annotation.DocumentCollection;
 import lombok.RequiredArgsConstructor;
 import me.q1zz.startprotection.configuration.PluginConfig;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +26,7 @@ public class DatabaseManager {
 
         final PersistencePath basePath = PersistencePath.of(this.pluginConfig.getDatabase().getPrefix());
 
-        final HikariConfig hikariConfig = this.getHikariConfig(this.pluginConfig.getDatabase().getHostname(), this.pluginConfig.getDatabase().getPort(), this.pluginConfig.getDatabase().getBase(), this.pluginConfig.getDatabase().getUsername(), this.pluginConfig.getDatabase().getPassword(), this.pluginConfig.getDatabase().getType());
+        final HikariConfig hikariConfig = this.getHikariConfig(this.pluginConfig.getDatabase().getHostname(), this.pluginConfig.getDatabase().getPort(), this.pluginConfig.getDatabase().getBase(), this.pluginConfig.getDatabase().getUsername(), this.pluginConfig.getDatabase().getPassword(), this.pluginConfig.getDatabase().isUseSSL(), this.pluginConfig.getDatabase().getType());
         final ConfigurerProvider configurer = JsonGsonConfigurer::new;
 
         this.persistence = new DocumentPersistence(new MariaDbPersistence(basePath, hikariConfig), configurer);
@@ -44,7 +43,7 @@ public class DatabaseManager {
     }
 
     @NotNull
-    private HikariConfig getHikariConfig(@Nullable String host, int port, @NotNull String database, @NotNull String username, @NotNull String password, @NotNull DatabaseType databaseType) {
+    private HikariConfig getHikariConfig(@Nullable String host, int port, @NotNull String database, @NotNull String username, @NotNull String password, boolean useSSL, @NotNull DatabaseType databaseType) {
 
         final HikariConfig hikariConfig = new HikariConfig();
 
@@ -73,7 +72,7 @@ public class DatabaseManager {
         hikariConfig.addDataSourceProperty("cacheServerConfiguration", "true");
         hikariConfig.addDataSourceProperty("elideSetAutoCommits", "true");
         hikariConfig.addDataSourceProperty("maintainTimeStats", "false");
-        hikariConfig.addDataSourceProperty("useSSL", String.valueOf(true));
+        hikariConfig.addDataSourceProperty("useSSL", String.valueOf(useSSL));
 
         return hikariConfig;
     }
