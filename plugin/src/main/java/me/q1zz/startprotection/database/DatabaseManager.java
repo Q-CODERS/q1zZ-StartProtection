@@ -2,10 +2,12 @@ package me.q1zz.startprotection.database;
 
 import com.zaxxer.hikari.HikariConfig;
 import eu.okaeri.configs.json.gson.JsonGsonConfigurer;
+import eu.okaeri.persistence.PersistenceCollection;
 import eu.okaeri.persistence.PersistencePath;
 import eu.okaeri.persistence.document.ConfigurerProvider;
 import eu.okaeri.persistence.document.DocumentPersistence;
 import eu.okaeri.persistence.jdbc.MariaDbPersistence;
+import eu.okaeri.persistence.repository.annotation.DocumentCollection;
 import lombok.RequiredArgsConstructor;
 import me.q1zz.startprotection.configuration.PluginConfig;
 import org.jetbrains.annotations.NotNull;
@@ -34,6 +36,11 @@ public class DatabaseManager {
     @NotNull
     public DocumentPersistence persistence() {
         return this.persistence;
+    }
+
+    public void registerCollections(@NotNull PersistenceCollection... collections) {
+        for (final PersistenceCollection collection : collections)
+            this.persistence.registerCollection(collection);
     }
 
     @NotNull

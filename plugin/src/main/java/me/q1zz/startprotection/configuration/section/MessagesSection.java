@@ -24,4 +24,26 @@ public class MessagesSection extends OkaeriConfig {
     @CustomKey("protection-time")
     private Message protectionTime = Message.actionbar("&8[&6&lOCHRONA&8] » &eOchrona startowa aktywna jeszcze przez:&7 {TIME}");
 
+    @Comment("PL: Wiadomość, gdy gracz ma aktywną ochronę.")
+    @Comment("EN: Message, when player has start protection.")
+    @CustomKey("player-has-protection")
+    private Message playerHasProtection = Message.chat("&8» &cTen gracz ma aktywną ochronę startową!");
+
+    @Comment("PL: Wiadomość, gdy ochrona startowa została wyłączona.")
+    @Comment("EN: Message, when start protection has been disabled.")
+    private Message protectionDisabled = Message.chat("&8» &aPomyślnie wyłączyłeś ochronę startową!");
+
+    @Comment("PL: Wiadomość, gdy gracz nie ma aktywnej ochrony startowej.")
+    @Comment("EN: Message when player does not have active start protection.")
+    @CustomKey("protection-not-active")
+    private Message protectionNotActive = Message.chat("&8» &cNie masz aktywnej ochrony startowej!");
+
+    @Comment("Wiadomość, gdy gracz użyje komendy w zły sposób.")
+    @CustomKey("correct-usage")
+    private Message correctUsage = Message.chat("&8» &cPoprawne użycie:&7 {USAGE}");
+
+    @Comment("Wyświetlany format dla użycia określonej komendy.")
+    @CustomKey("correct-usage-entry")
+    private Message correctUsageEntry = Message.chat("&8» &c{USAGE}");
+
 }
