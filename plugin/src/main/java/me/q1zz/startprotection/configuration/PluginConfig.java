@@ -12,7 +12,7 @@ import me.q1zz.startprotection.configuration.section.ProtectionSection;
 public class PluginConfig extends OkaeriConfig {
 
     @Comment("PL: Konfiguracja bazy danych.")
-    @Comment("PL: Database configuration.")
+    @Comment("EN: Database configuration.")
     private DatabaseSection database = new DatabaseSection();
 
     @Comment("PL: Konfiguracja ochrony startowej.")
