@@ -42,7 +42,7 @@ dependencies {
 
     // Adventure (messages)
     implementation 'net.kyori:adventure-platform-bukkit:4.3.0'
-    implementation 'net.kyori:adventure-text-minimessage:4.13.0'
+    implementation 'net.kyori:adventure-text-minimessage:4.15.0'
 
     // Commands
     implementation 'dev.rollczi:litecommands-bukkit:3.3.3'
