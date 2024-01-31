@@ -1,7 +1,7 @@
 name: q1zZ-StartProtection
 main: me.q1zz.startprotection.StartProtectionPlugin
 version: 0.1
-api-version: 1.13
+api-version: 1.16
 author: q1zZ
 website: https://github.com/q1zZu
 description: Minecraft plugin that adding protection for new players.
