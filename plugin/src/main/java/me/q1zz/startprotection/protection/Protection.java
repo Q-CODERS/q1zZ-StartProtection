@@ -29,15 +29,19 @@ public class Protection extends Document {
     }
 
     public boolean isActive() {
-        return this.isActivated() && !this.isEnd();
+        return this.hasBeenActivated() && !this.isExpired();
     }
 
-    public boolean isActivated() {
+    public boolean hasBeenActivated() {
         return this.endOfProtection != null;
     }
 
     public boolean isEnd() {
-        return Instant.now().isAfter(this.endOfProtection);
+        return this.endOfProtection != null && this.endOfProtection.equals(Instant.EPOCH);
+    }
+
+    public boolean isExpired() {
+        return this.endOfProtection != null && (this.endOfProtection.equals(Instant.EPOCH) || Instant.now().isAfter(this.endOfProtection));
     }
 
 }

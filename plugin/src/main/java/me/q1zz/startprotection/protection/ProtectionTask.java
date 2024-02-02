@@ -29,17 +29,11 @@ public class ProtectionTask extends BukkitRunnable {
                 continue;
             }
 
-            if(!protection.isActivated()) {
-                continue;
-            }
-
-            final Instant endOfProtection = protection.getEndOfProtection();
-
-            if(endOfProtection.equals(Instant.EPOCH)) {
-                continue;
-            }
-
             if(protection.isEnd()) {
+                continue;
+            }
+
+            if(protection.isExpired()) {
 
                 protection.endProtection();
 
@@ -49,6 +43,7 @@ public class ProtectionTask extends BukkitRunnable {
                 continue;
             }
 
+            final Instant endOfProtection = protection.getEndOfProtection();
             final Duration remainingTime = Duration.between(Instant.now(), endOfProtection);
 
             this.announcer.sendMessage(player, this.pluginConfig.getMessages().getProtectionTime(), Map.of(
