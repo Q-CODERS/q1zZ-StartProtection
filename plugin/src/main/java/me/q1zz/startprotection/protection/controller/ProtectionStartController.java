@@ -28,11 +28,7 @@ public class ProtectionStartController implements Listener {
 
         final Protection protection = this.protectionService.getProtection(playerId);
 
-        if(protection.isActivated()) {
-            return;
-        }
-
-        if(protection.isEnd()) {
+        if(protection.hasBeenActivated()) {
             return;
         }
 

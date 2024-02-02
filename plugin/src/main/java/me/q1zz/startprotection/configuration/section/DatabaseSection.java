@@ -10,10 +10,10 @@ import me.q1zz.startprotection.database.DatabaseType;
 public class DatabaseSection extends OkaeriConfig {
 
     @Comment("PL: Typ bazy danych.")
-    @Comment("PL: Dostępne: MYSQL, SQLITE")
+    @Comment("PL: Dostępne: MYSQL, H2")
     @Comment(" ")
     @Comment("EN: Database type.")
-    @Comment("EN: Available: MYSQL, SQLITE")
+    @Comment("EN: Available: MYSQL, H2")
     private DatabaseType type = DatabaseType.MYSQL;
 
     @Comment("PL: Prefix dla bazy danych.")
