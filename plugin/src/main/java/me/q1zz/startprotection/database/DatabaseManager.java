@@ -6,7 +6,9 @@ import eu.okaeri.persistence.PersistenceCollection;
 import eu.okaeri.persistence.PersistencePath;
 import eu.okaeri.persistence.document.ConfigurerProvider;
 import eu.okaeri.persistence.document.DocumentPersistence;
+import eu.okaeri.persistence.jdbc.H2Persistence;
 import eu.okaeri.persistence.jdbc.MariaDbPersistence;
+import eu.okaeri.persistence.raw.RawPersistence;
 import lombok.RequiredArgsConstructor;
 import me.q1zz.startprotection.configuration.PluginConfig;
 import org.jetbrains.annotations.NotNull;
@@ -25,11 +27,17 @@ public class DatabaseManager {
     public void connect() {
 
         final PersistencePath basePath = PersistencePath.of(this.pluginConfig.getDatabase().getPrefix());
+        final DatabaseType databaseType = this.pluginConfig.getDatabase().getType();
 
-        final HikariConfig hikariConfig = this.getHikariConfig(this.pluginConfig.getDatabase().getHostname(), this.pluginConfig.getDatabase().getPort(), this.pluginConfig.getDatabase().getBase(), this.pluginConfig.getDatabase().getUsername(), this.pluginConfig.getDatabase().getPassword(), this.pluginConfig.getDatabase().isUseSSL(), this.pluginConfig.getDatabase().getType());
+        final HikariConfig hikariConfig = this.getHikariConfig(this.pluginConfig.getDatabase().getHostname(), this.pluginConfig.getDatabase().getPort(), this.pluginConfig.getDatabase().getBase(), this.pluginConfig.getDatabase().getUsername(), this.pluginConfig.getDatabase().getPassword(), this.pluginConfig.getDatabase().isUseSSL(), databaseType);
         final ConfigurerProvider configurer = JsonGsonConfigurer::new;
 
-        this.persistence = new DocumentPersistence(new MariaDbPersistence(basePath, hikariConfig), configurer);
+        final RawPersistence rawPersistence = switch (databaseType) {
+            case MYSQL -> new MariaDbPersistence(basePath, hikariConfig);
+            case H2 -> new H2Persistence(basePath, hikariConfig);
+        };
+
+        this.persistence = new DocumentPersistence(rawPersistence, configurer);
     }
 
     @NotNull
@@ -55,9 +63,9 @@ public class DatabaseManager {
                 hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
                 hikariConfig.setJdbcUrl(String.format("jdbc:mysql://%s:%d/%s", host, port, database));
             }
-            case SQLITE -> {
-                hikariConfig.setDriverClassName("org.sqlite.JDBC");
-                hikariConfig.setJdbcUrl(String.format("jdbc:sqlite:%s/%s", this.dataFolder.getPath(), "database.db"));
+            case H2 -> {
+                hikariConfig.setDriverClassName("org.h2.Driver");
+                hikariConfig.setJdbcUrl(String.format("jdbc:h2:./%s/database;%s", this.dataFolder.getPath(), "mode=mysql"));
             }
             default -> throw new IllegalArgumentException("Unsupported database type: " + databaseType.name());
         }
