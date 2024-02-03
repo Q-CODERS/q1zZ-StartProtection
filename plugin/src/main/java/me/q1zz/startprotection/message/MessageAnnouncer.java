@@ -27,13 +27,14 @@ public class MessageAnnouncer {
                 .clone()
                 .replaceAll(replacements)
                 .getText();
+        final Component textComponent = this.miniMessage.deserialize(text);
 
         switch (message.getType()) {
-            case TITLE -> audience.showTitle(Title.title(this.miniMessage.deserialize(text), Component.text(" ")));
-            case SUBTITLE -> audience.showTitle(Title.title(Component.text(" "), this.miniMessage.deserialize(text)));
-            case ACTIONBAR -> audience.sendActionBar(this.miniMessage.deserialize(text));
-            case NONE -> {}
-            default -> audience.sendMessage(this.miniMessage.deserialize(text));
+            case TITLE -> audience.showTitle(Title.title(textComponent, Component.text(" ")));
+            case SUBTITLE -> audience.showTitle(Title.title(Component.text(" "), textComponent));
+            case ACTIONBAR -> audience.sendActionBar(textComponent);
+            case CHAT -> audience.sendMessage(textComponent);
+            default -> {}
         }
 
     }
