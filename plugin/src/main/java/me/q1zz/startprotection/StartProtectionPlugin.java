@@ -28,6 +28,7 @@ import me.q1zz.startprotection.protection.controller.ProtectionStartController;
 import me.q1zz.startprotection.util.legacy.LegacyColorProcessor;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginManager;
@@ -102,6 +103,8 @@ public class StartProtectionPlugin extends JavaPlugin {
 
                 // Building
                 .build();
+
+        new Metrics(this, 20910);
 
         this.getLogger().info("Successfully started in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + "ms!");
     }
