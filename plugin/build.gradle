@@ -47,6 +47,9 @@ dependencies {
     // Commands
     implementation 'dev.rollczi:litecommands-bukkit:3.3.3'
 
+    // bStats
+    implementation 'org.bstats:bstats-bukkit:3.0.2'
+
     // Annotations
     implementation 'org.jetbrains:annotations:24.1.0'
 
@@ -73,6 +76,7 @@ shadowJar {
     relocate("net.kyori", "me.q1zz.startprotection.libs.net.kyori")
     relocate("org.jetbrains", "me.q1zz.startprotection.libs.org.jetbrains")
     relocate("org.intellij", "me.q1zz.startprotection.libs.org.intellij")
+    relocate("org.bstats", "me.q1zz.startprotection.libs.org.bstats")
     relocate("panda.std", "me.q1zz.startprotection.libs.panda.std")
     relocate("com.zaxxer.hikari", "me.q1zz.startprotection.libs.com.zaxxer.hikari")
 }
