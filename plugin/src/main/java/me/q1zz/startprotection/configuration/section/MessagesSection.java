@@ -31,6 +31,7 @@ public class MessagesSection extends OkaeriConfig {
 
     @Comment("PL: Wiadomość, gdy ochrona startowa została wyłączona.")
     @Comment("EN: Message, when start protection has been disabled.")
+    @CustomKey("protection-disabled")
     private Message protectionDisabled = Message.chat("&8» &aPomyślnie wyłączyłeś ochronę startową!");
 
     @Comment("PL: Wiadomość, gdy gracz nie ma aktywnej ochrony startowej.")
